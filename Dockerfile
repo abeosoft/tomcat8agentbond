@@ -1,4 +1,4 @@
-FROM finntech/openjdk8bond
+FROM finntech/openjdk8bond:8.72
 
 MAINTAINER christopher.kolstad@finn.no
 
@@ -13,14 +13,15 @@ RUN curl http://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v$
   && ln -s /opt/apache/tomcat-${TOMCAT_VERSION} /opt/tomcat \
   && rm /tmp/catalina.tar.gz
 
-  ADD tomcat-users.xml /opt/apache-tomcat-${TOMCAT_VERSION}/conf/
+ADD tomcat-users.xml /opt/apache-tomcat-${TOMCAT_VERSION}/conf/
 
-  ADD deploy-and-run.sh /opt/apache-tomcat-${TOMCAT_VERSION}/bin/
+ADD deploy-and-run.sh /opt/apache-tomcat-${TOMCAT_VERSION}/bin/
 
-  RUN chmod 755 /opt/apache-tomcat-${TOMCAT_VERSION}/bin/deploy-and-run.sh \
-    && rm -rf /opt/tomcat/webapps/examples /opt/tomcat/webapps/docs
+RUN chmod 755 /opt/apache-tomcat-${TOMCAT_VERSION}/bin/deploy-and-run.sh \
+  && rm -rf /opt/apache-tomcat-${TOMCAT_VERSION}/webapps \
+  && mkdir /opt/apache-tomcat-${TOMCAT_VERSION}/webapps
 
-ENV CATALINA_HOME /opt/tomcat
+ENV CATALINA_HOME /opt/apache-tomcat-${TOMCAT_VERSION}
 ENV PATH $PATH:$CATALINA_HOME/bin
 
-CMD /opt/tomcat/bin/deploy-and-run.sh
+CMD /opt/apache-tomcat-${TOMCAT_VERSION}/bin/deploy-and-run.sh

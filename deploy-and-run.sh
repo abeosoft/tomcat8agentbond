@@ -2,7 +2,7 @@
 appDir=${DEPLOY_DIR:-/maven}
 echo "Checking *.war in $appDir"
 if [ -d ${appDir} ]; then
-  target="/opt/tomcat/webapps"
+  target="/opt/apache-tomcat-${TOMCAT_VERSION}/webapps"
   for i in ${appDir}/*.war; do
      file=$(basename ${i})
      echo "Linking $i --> $target"
@@ -18,5 +18,5 @@ if [ -d ${appDir} ]; then
 fi
 
 # Use faster (though more unsecure) random number generator
-export CATALINA_OPTS="${CATALINA_OPTS} $(agent-bond-opts --escape) -Djava.security.egd=file:/dev/./urandom"
-/opt/tomcat/bin/catalina.sh run
+export CATALINA_OPTS="${CATALINA_OPTS} $(/opt/run-java-options --escape) -Djava.security.egd=file:/dev/./urandom"
+/opt/apache-tomcat-${TOMCAT_VERSION}/bin/catalina.sh run
