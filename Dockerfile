@@ -1,4 +1,4 @@
-FROM finntech/openjdk8fabric
+FROM finntech/openjdk8bond
 
 MAINTAINER christopher.kolstad@finn.no
 
