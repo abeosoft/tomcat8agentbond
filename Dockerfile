@@ -17,6 +17,8 @@ ADD tomcat-users.xml /opt/apache-tomcat-${TOMCAT_VERSION}/conf/
 
 ADD deploy-and-run.sh /opt/apache-tomcat-${TOMCAT_VERSION}/bin/
 
+ADD serverinfo.jar /opt/apache-tomcat-${TOMCAT_VERSION}/lib/
+
 RUN chmod 755 /opt/apache-tomcat-${TOMCAT_VERSION}/bin/deploy-and-run.sh \
   && rm -rf /opt/apache-tomcat-${TOMCAT_VERSION}/webapps \
   && mkdir /opt/apache-tomcat-${TOMCAT_VERSION}/webapps
