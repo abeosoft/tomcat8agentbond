@@ -1,4 +1,4 @@
-FROM finntech/openjdk8bond:8.72
+FROM finntech/openjdk8bond:edge
 
 MAINTAINER christopher.kolstad@finn.no
 
