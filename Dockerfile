@@ -1,11 +1,11 @@
-FROM finntech/openjdk8bond:edge
+FROM finntech/openjdk8bond:1.8.0_77
 
 MAINTAINER christopher.kolstad@finn.no
 
 EXPOSE 8080
 
 ENV TOMCAT_MAJOR_VERSION 8
-ENV TOMCAT_VERSION 8.0.32
+ENV TOMCAT_VERSION 8.0.33
 ENV DEPLOY_DIR /maven
 
 RUN curl http://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -o /tmp/catalina.tar.gz \
